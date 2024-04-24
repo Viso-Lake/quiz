@@ -39,8 +39,8 @@ class Feedback(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Обратная"
-        verbose_name_plural = "Обратная"
+        verbose_name = "Обратная связь"
+        verbose_name_plural = "Обратная связь"
 
 
 class History(models.Model):

@@ -1,23 +1,24 @@
 import os, sys
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, os.path.join(BASE_DIR, "apps"))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-9k-(r7w-so1i7vw_rg*l7i-a8rp&l3uh8gvg@0u)=zcluewh(^"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 INTERNAL_IPS = ["127.0.0.1", "192.168.52.72"]
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -59,10 +60,6 @@ CSRF_COOKIE_NAME = "csrftoken"
 
 APPEND_SLASH = True
 
-
-# LOGGING
-DRF_API_LOGGER_DATABASE = True
-
 ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
@@ -83,21 +80,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("PG_NAME"),
+        "USER": os.getenv("PG_USER"),
+        "PASSWORD": os.getenv("PG_PASS"),
+        "HOST": os.getenv("PG_HOST"),
+        "PORT": os.getenv("PG_PORT"),
+        "CONN_MAX_AGE": 0,
     }
 }
 
 
 # Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -115,7 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = "ru"
 
@@ -127,11 +123,12 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# LOGGING
+DRF_API_LOGGER_DATABASE = True

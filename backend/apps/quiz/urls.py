@@ -16,15 +16,15 @@ from .views import (
 router = DefaultRouter()
 
 # Регистрируем все viewsets
-router.register("admin", AdminViewSet)
-router.register("answer", AnswerViewSet)
-router.register("feedback", FeedbackViewSet)
-router.register("history", HistoryViewSet)
+router.register("admins", AdminViewSet)
+router.register("answers", AnswerViewSet)
+router.register("feedbacks", FeedbackViewSet)
+router.register("histories", HistoryViewSet)
 router.register("options", OptionsViewSet)
 router.register("questions", QuestionsViewSet)
-router.register("quiz", QuizViewSet)
-router.register("rank", RankViewSet)
-router.register("user", UserViewSet)
+router.register("quizes", QuizViewSet)
+router.register("ranks", RankViewSet)
+router.register("users", UserViewSet)
 
 # Включаем созданные роуты в urlpatterns
 urlpatterns = [

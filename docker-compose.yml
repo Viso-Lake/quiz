@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  quiz_psql:
+    container_name: quiz_psql
+    image: postgres:alpine
+    # command: -c 'max_connections=500'
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_MAX_CONNECTIONS: 500
+    ports:
+      - "6002:5432"
+    volumes:
+      - pg_quiz_data_volume:/var/lib/postgresql/data
+
+volumes:
+  pg_quiz_data_volume:
